@@ -213,7 +213,8 @@ am_cantomat_OBJECTS = src/cantomat/cantomat.$(OBJEXT) \
 cantomat_OBJECTS = $(am_cantomat_OBJECTS)
 am__DEPENDENCIES_1 =
 cantomat_DEPENDENCIES = libcandbc.la libcanasc.la libcanvsb.la \
-	$(am__append_2) $(am__DEPENDENCIES_1) @LIBOBJS@
+	$(am__append_2) $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) @LIBOBJS@
 am_dbccopy_OBJECTS = src/dbccopy/dbccopy.$(OBJEXT)
 dbccopy_OBJECTS = $(am_dbccopy_OBJECTS)
 dbccopy_DEPENDENCIES = libcandbc.la
@@ -222,7 +223,8 @@ dbcls_OBJECTS = $(am_dbcls_OBJECTS)
 dbcls_DEPENDENCIES = libcandbc.la
 am_mdftomat_OBJECTS = src/mdftomat/mdftomat.$(OBJEXT)
 mdftomat_OBJECTS = $(am_mdftomat_OBJECTS)
-mdftomat_DEPENDENCIES = libcanmdf.la $(am__DEPENDENCIES_1) @LIBOBJS@
+mdftomat_DEPENDENCIES = libcanmdf.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) @LIBOBJS@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -366,6 +368,7 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
+HDF5_LIB = @HDF5_LIB@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -383,6 +386,7 @@ LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MATIO_LIB = @MATIO_LIB@
@@ -409,6 +413,7 @@ STRIP = @STRIP@
 VERSION = @VERSION@
 YACC = @YACC@
 YFLAGS = @YFLAGS@
+Z_LIB = @Z_LIB@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
