@@ -223,8 +223,8 @@ dbcls_OBJECTS = $(am_dbcls_OBJECTS)
 dbcls_DEPENDENCIES = libcandbc.la
 am_matdump_OBJECTS = src/matdump/matdump.$(OBJEXT)
 matdump_OBJECTS = $(am_matdump_OBJECTS)
-matdump_DEPENDENCIES = libcanmdf.la $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) @LIBOBJS@
+matdump_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) @LIBOBJS@
 am_mdftomat_OBJECTS = src/mdftomat/mdftomat.$(OBJEXT)
 mdftomat_OBJECTS = $(am_mdftomat_OBJECTS)
 mdftomat_DEPENDENCIES = libcanmdf.la $(am__DEPENDENCIES_1) \
@@ -579,7 +579,7 @@ mdftomat_LDADD = libcanmdf.la $(MATIO_LIB) $(Z_LIB) $(HDF5_LIB) @LIBOBJS@
 matdump_SOURCES = src/matdump/matdump.c \
                    src/matdump/matdump.h
 
-matdump_LDADD = libcanmdf.la $(MATIO_LIB) $(Z_LIB) $(HDF5_LIB) @LIBOBJS@
+matdump_LDADD = $(MATIO_LIB) $(Z_LIB) $(HDF5_LIB) @LIBOBJS@
 
 # additional include pathes necessary
 AM_CPPFLAGS = -I$(top_srcdir)/src/libcandbc \
