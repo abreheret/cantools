@@ -23,6 +23,7 @@
 #include <assert.h>
 #include <matio.h>
 #include <getopt.h>
+#include <ctype.h>
 
 #include "mdftomat.h"
 #include "mdfcg.h"
