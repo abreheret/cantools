@@ -1,3 +1,9 @@
+2016-03-19    <aheit@EUCLID>
+
+	* all: release version 0.15
+	* libcanmdf: support for 1-bit signed integers added
+	* hashtable: resolved conflicting definitions of key/value accessors
+
 2016-02-14    <aheit@EUCLID>
 
 	* all: release version 0.14
