@@ -21,15 +21,16 @@
 /* Define to 1 if the right shift operation is arithmetic. */
 #undef HAVE_ARITHMETIC_RSHIFT
 
+/* Define to 1 if you have the declaration of `strndup', and to 0 if you
+   don't. */
+#undef HAVE_DECL_STRNDUP
+
 /* Define to 1 if you have the declaration of `strtok_r', and to 0 if you
    don't. */
 #undef HAVE_DECL_STRTOK_R
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
-
-/* Define to 1 if you have the <endian.h> header file. */
-#undef HAVE_ENDIAN_H
 
 /* Define to 1 if you have the <fcntl.h> header file. */
 #undef HAVE_FCNTL_H
@@ -249,5 +250,12 @@
 
 #if !HAVE_DECL_STRTOK_R
 extern char *strtok_r (char *s, const char *delim, char **save_ptr);
+#endif
+
+
+
+#if !HAVE_DECL_STRNDUP
+#include <stddef.h>
+extern char *strndup (const char *s, size_t n);
 #endif
 

@@ -104,9 +104,9 @@ DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in src/libcandbc/parser.h \
 	src/libcandbc/parser.c src/libcandbc/lexer.c strtok_r.c \
-	depcomp ylwrap $(include_HEADERS) AUTHORS COPYING ChangeLog \
-	README TODO compile config.guess config.sub install-sh missing \
-	ltmain.sh
+	strndup.c depcomp ylwrap $(include_HEADERS) AUTHORS COPYING \
+	ChangeLog README TODO compile config.guess config.sub \
+	install-sh missing ltmain.sh
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -385,7 +385,7 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DEFS = $(YYDEBUG)
+DEFS = $(YYDEBUG) @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
@@ -588,6 +588,7 @@ include_HEADERS = src/libcandbc/dbcModel.h \
 		 src/libcanvsb/vsbReader.h \
 		 src/cantomat/messageDecoder.h \
 		 src/libcanmdf/mdfcn.h \
+		 src/libcanmdf/mdfswap.h \
 		 src/libcanmdf/mdftypes.h
 
 libcandbc_la_SOURCES = \
@@ -945,6 +946,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/strndup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/strtok_r.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/cantomat/$(DEPDIR)/busAssignment.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/cantomat/$(DEPDIR)/cantomat.Po@am__quote@
