@@ -1,0 +1,126 @@
+General Information
+===================
+
+cantools is a set of command line tools for dealing with ASC, MDF, and
+DBC files from Vector-Informatik. The tools can be used to analyze and
+convert the data to other formats:
+
+* dbcls lists the contents of a DBC file.
+* cantomat converts a .ASC, a .VSB, or a .CLG log file to a MATLAB
+  .MAT file 
+* mdftomat converts a .MDF log file to a MATLAB .MAT file (up to MDF
+  version 3.x) 
+
+Some tools are available for testing of converters:
+
+* matdump displays the content of a mat file as ASCII text
+* dbccopy copies a dbcfile
+
+The tools 'asctomat' and 'mdftomat' require the package matio, which
+needs to be compiled and installed first (see instructions below).
+
+Shared libraries for parsing and accessing these files are also
+provided:
+
+* libcandbc, libcanasc, libcanmdf: parsing of DBC, ASC, MDF files
+
+
+Installation of hdf5
+=====================
+Prerequisites: zlib-devel, bison, flex, make, gcc
+
+matio can be built with libhdf5, here is how to:
+
+1) download:
+   wget 'http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.16.tar.bz2'
+2) unpack:
+   tar xjf hdf5-1.8.16.tar.bz2
+3) build:
+   cd hdf5-1.8.16
+   ./configure --with-zlib=/usr/include,/lib --prefix=/usr
+   CFLAGS=-std=c99 make
+   CFLAGS=-std=c99 make check
+   
+4) install:
+   make install
+
+
+Installation of matio
+=====================
+Prerequisites: autotools, zlib-devel, make, gcc
+
+1) download matio-1.5.2.tar.gz:
+   wget 'http://downloads.sourceforge.net/matio/matio-1.5.2.tar.gz?use_mirror='
+   or
+   curl -o matio-1.5.2.tar.gz -L 'http://downloads.sourceforge.net/matio/matio-1.5.2.tar.gz?use_mirror='
+2) unpack:
+   tar xzf matio-1.5.2.tar.gz
+3) configure:
+   cd matio-1.5.2
+   CFLAGS=-DZ_PREFIX ./configure --with-zlib=/ --with-hdf5=/ --prefix=/usr
+4) build and install:
+   make ; make install
+
+Installation of cantools
+========================
+Prerequisites: autotools, matio, bison, flex, make, gcc
+
+download and extract cantools-*.tar.gz
+cd cantools
+libtoolize
+autoreconf -f -i
+./configure
+make
+make install
+
+Execute Unit Test(s)
+====================
+     - run 'make check'
+     - all tests should PASS
+
+Debugging DBC parser
+====================
+Edit Makefile:
+     - uncomment the line DEFS=$(YYDEBUG)
+     - add "extern int yydebug; yydebug = 1;" to the main program
+     - recompile
+
+Profiling
+=========
+Edit Makefile:
+     - add flag "-pg" to CFLAGS
+
+Troubleshooting
+===============
+1) Error: ./libtool: line 860: X--tag=CC: command not found
+   Reason: libtool scripts from a different environment are used
+   Fix: execute "autoreconf -f -i; make"
+
+2) Error: matio.h: No such file or directory
+   Reason: matio is not installed
+   Fix: install matio  (see "Installation of matio")
+
+3) Error: configure stops with "Error! You need to install libmatio first."
+   Reason: linker did not find matio in the library path
+   Fix: install matio to /usr instead of /usr/local. Set PREFIX to
+   /usr at configuration time (see "Installation of matio")
+
+4) Error while compiling matio-1.5:
+     libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -DZ_PREFIX -c mat.c  -DDLL_EXPORT -DPIC -o .libs/mat.o
+     mat.c: In function `Mat_VarReadInfo':
+     mat.c:1710: warning: dereferencing `void *' pointer
+     mat.c:1710: error: request for member `_flags' in something not a structure or union
+     mat.c: In function `Mat_VarReadNext':
+     mat.c:1762: warning: dereferencing `void *' pointer
+     mat.c:1762: error: request for member `_flags' in something not a structure or union
+   Reason: incorrect definition in _mat_t
+   Fix: in file matio_private.h, replace line 
+    void *fp;               /**< File pointer for the MAT file */
+   by
+    FILE *fp;               /**< File pointer for the MAT file */
+
+5) Error message from make: "configure.ac:36: error: required file
+   './compile' not found" (or similar)
+   Reason: platform specific automake scripts are not provided by the
+   source distribution. 
+   Fix: run 'autoreconf -f -i'
